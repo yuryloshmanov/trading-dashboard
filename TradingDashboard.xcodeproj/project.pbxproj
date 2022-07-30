@@ -1,0 +1,581 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AC8078D22893E1B200888287 /* TradingDashboardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8078D12893E1B200888287 /* TradingDashboardApp.swift */; };
+		AC8078D42893E1B200888287 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8078D32893E1B200888287 /* ContentView.swift */; };
+		AC8078D62893E1B200888287 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC8078D52893E1B200888287 /* Assets.xcassets */; };
+		AC8078D92893E1B200888287 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC8078D82893E1B200888287 /* Preview Assets.xcassets */; };
+		AC8078E42893E1B200888287 /* TradingDashboardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8078E32893E1B200888287 /* TradingDashboardTests.swift */; };
+		AC8078EE2893E1B300888287 /* TradingDashboardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8078ED2893E1B300888287 /* TradingDashboardUITests.swift */; };
+		AC8078F02893E1B300888287 /* TradingDashboardUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8078EF2893E1B300888287 /* TradingDashboardUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AC8078E02893E1B200888287 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC8078C62893E1B200888287 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC8078CD2893E1B200888287;
+			remoteInfo = TradingDashboard;
+		};
+		AC8078EA2893E1B300888287 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AC8078C62893E1B200888287 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AC8078CD2893E1B200888287;
+			remoteInfo = TradingDashboard;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AC8078CE2893E1B200888287 /* TradingDashboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TradingDashboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC8078D12893E1B200888287 /* TradingDashboardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingDashboardApp.swift; sourceTree = "<group>"; };
+		AC8078D32893E1B200888287 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AC8078D52893E1B200888287 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AC8078D82893E1B200888287 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AC8078DA2893E1B200888287 /* TradingDashboard.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TradingDashboard.entitlements; sourceTree = "<group>"; };
+		AC8078DF2893E1B200888287 /* TradingDashboardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TradingDashboardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC8078E32893E1B200888287 /* TradingDashboardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingDashboardTests.swift; sourceTree = "<group>"; };
+		AC8078E92893E1B300888287 /* TradingDashboardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TradingDashboardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AC8078ED2893E1B300888287 /* TradingDashboardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingDashboardUITests.swift; sourceTree = "<group>"; };
+		AC8078EF2893E1B300888287 /* TradingDashboardUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingDashboardUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AC8078CB2893E1B200888287 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC8078DC2893E1B200888287 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC8078E62893E1B300888287 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AC8078C52893E1B200888287 = {
+			isa = PBXGroup;
+			children = (
+				AC8078D02893E1B200888287 /* TradingDashboard */,
+				AC8078E22893E1B200888287 /* TradingDashboardTests */,
+				AC8078EC2893E1B300888287 /* TradingDashboardUITests */,
+				AC8078CF2893E1B200888287 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AC8078CF2893E1B200888287 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AC8078CE2893E1B200888287 /* TradingDashboard.app */,
+				AC8078DF2893E1B200888287 /* TradingDashboardTests.xctest */,
+				AC8078E92893E1B300888287 /* TradingDashboardUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AC8078D02893E1B200888287 /* TradingDashboard */ = {
+			isa = PBXGroup;
+			children = (
+				AC8078D12893E1B200888287 /* TradingDashboardApp.swift */,
+				AC8078D32893E1B200888287 /* ContentView.swift */,
+				AC8078D52893E1B200888287 /* Assets.xcassets */,
+				AC8078DA2893E1B200888287 /* TradingDashboard.entitlements */,
+				AC8078D72893E1B200888287 /* Preview Content */,
+			);
+			path = TradingDashboard;
+			sourceTree = "<group>";
+		};
+		AC8078D72893E1B200888287 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				AC8078D82893E1B200888287 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		AC8078E22893E1B200888287 /* TradingDashboardTests */ = {
+			isa = PBXGroup;
+			children = (
+				AC8078E32893E1B200888287 /* TradingDashboardTests.swift */,
+			);
+			path = TradingDashboardTests;
+			sourceTree = "<group>";
+		};
+		AC8078EC2893E1B300888287 /* TradingDashboardUITests */ = {
+			isa = PBXGroup;
+			children = (
+				AC8078ED2893E1B300888287 /* TradingDashboardUITests.swift */,
+				AC8078EF2893E1B300888287 /* TradingDashboardUITestsLaunchTests.swift */,
+			);
+			path = TradingDashboardUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AC8078CD2893E1B200888287 /* TradingDashboard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC8078F32893E1B300888287 /* Build configuration list for PBXNativeTarget "TradingDashboard" */;
+			buildPhases = (
+				AC8078CA2893E1B200888287 /* Sources */,
+				AC8078CB2893E1B200888287 /* Frameworks */,
+				AC8078CC2893E1B200888287 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TradingDashboard;
+			productName = TradingDashboard;
+			productReference = AC8078CE2893E1B200888287 /* TradingDashboard.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AC8078DE2893E1B200888287 /* TradingDashboardTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC8078F62893E1B300888287 /* Build configuration list for PBXNativeTarget "TradingDashboardTests" */;
+			buildPhases = (
+				AC8078DB2893E1B200888287 /* Sources */,
+				AC8078DC2893E1B200888287 /* Frameworks */,
+				AC8078DD2893E1B200888287 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC8078E12893E1B200888287 /* PBXTargetDependency */,
+			);
+			name = TradingDashboardTests;
+			productName = TradingDashboardTests;
+			productReference = AC8078DF2893E1B200888287 /* TradingDashboardTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		AC8078E82893E1B300888287 /* TradingDashboardUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AC8078F92893E1B300888287 /* Build configuration list for PBXNativeTarget "TradingDashboardUITests" */;
+			buildPhases = (
+				AC8078E52893E1B300888287 /* Sources */,
+				AC8078E62893E1B300888287 /* Frameworks */,
+				AC8078E72893E1B300888287 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AC8078EB2893E1B300888287 /* PBXTargetDependency */,
+			);
+			name = TradingDashboardUITests;
+			productName = TradingDashboardUITests;
+			productReference = AC8078E92893E1B300888287 /* TradingDashboardUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AC8078C62893E1B200888287 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1340;
+				LastUpgradeCheck = 1340;
+				TargetAttributes = {
+					AC8078CD2893E1B200888287 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
+					AC8078DE2893E1B200888287 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = AC8078CD2893E1B200888287;
+					};
+					AC8078E82893E1B300888287 = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = AC8078CD2893E1B200888287;
+					};
+				};
+			};
+			buildConfigurationList = AC8078C92893E1B200888287 /* Build configuration list for PBXProject "TradingDashboard" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AC8078C52893E1B200888287;
+			productRefGroup = AC8078CF2893E1B200888287 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AC8078CD2893E1B200888287 /* TradingDashboard */,
+				AC8078DE2893E1B200888287 /* TradingDashboardTests */,
+				AC8078E82893E1B300888287 /* TradingDashboardUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AC8078CC2893E1B200888287 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC8078D92893E1B200888287 /* Preview Assets.xcassets in Resources */,
+				AC8078D62893E1B200888287 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC8078DD2893E1B200888287 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC8078E72893E1B300888287 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AC8078CA2893E1B200888287 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC8078D42893E1B200888287 /* ContentView.swift in Sources */,
+				AC8078D22893E1B200888287 /* TradingDashboardApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC8078DB2893E1B200888287 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC8078E42893E1B200888287 /* TradingDashboardTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AC8078E52893E1B300888287 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AC8078EE2893E1B300888287 /* TradingDashboardUITests.swift in Sources */,
+				AC8078F02893E1B300888287 /* TradingDashboardUITestsLaunchTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AC8078E12893E1B200888287 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC8078CD2893E1B200888287 /* TradingDashboard */;
+			targetProxy = AC8078E02893E1B200888287 /* PBXContainerItemProxy */;
+		};
+		AC8078EB2893E1B300888287 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AC8078CD2893E1B200888287 /* TradingDashboard */;
+			targetProxy = AC8078EA2893E1B300888287 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		AC8078F12893E1B300888287 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AC8078F22893E1B300888287 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		AC8078F42893E1B300888287 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TradingDashboard/TradingDashboard.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TradingDashboard/Preview Content\"";
+				DEVELOPMENT_TEAM = WB66JC2F27;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yuryloshmanov.TradingDashboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		AC8078F52893E1B300888287 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TradingDashboard/TradingDashboard.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TradingDashboard/Preview Content\"";
+				DEVELOPMENT_TEAM = WB66JC2F27;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yuryloshmanov.TradingDashboard;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		AC8078F72893E1B300888287 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WB66JC2F27;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yuryloshmanov.TradingDashboardTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TradingDashboard.app/Contents/MacOS/TradingDashboard";
+			};
+			name = Debug;
+		};
+		AC8078F82893E1B300888287 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WB66JC2F27;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.3;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yuryloshmanov.TradingDashboardTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TradingDashboard.app/Contents/MacOS/TradingDashboard";
+			};
+			name = Release;
+		};
+		AC8078FA2893E1B300888287 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WB66JC2F27;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yuryloshmanov.TradingDashboardUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = TradingDashboard;
+			};
+			name = Debug;
+		};
+		AC8078FB2893E1B300888287 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = WB66JC2F27;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = yuryloshmanov.TradingDashboardUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = TradingDashboard;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AC8078C92893E1B200888287 /* Build configuration list for PBXProject "TradingDashboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC8078F12893E1B300888287 /* Debug */,
+				AC8078F22893E1B300888287 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC8078F32893E1B300888287 /* Build configuration list for PBXNativeTarget "TradingDashboard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC8078F42893E1B300888287 /* Debug */,
+				AC8078F52893E1B300888287 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC8078F62893E1B300888287 /* Build configuration list for PBXNativeTarget "TradingDashboardTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC8078F72893E1B300888287 /* Debug */,
+				AC8078F82893E1B300888287 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AC8078F92893E1B300888287 /* Build configuration list for PBXNativeTarget "TradingDashboardUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AC8078FA2893E1B300888287 /* Debug */,
+				AC8078FB2893E1B300888287 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AC8078C62893E1B200888287 /* Project object */;
+}
