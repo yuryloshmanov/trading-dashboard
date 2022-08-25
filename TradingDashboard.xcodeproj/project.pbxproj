@@ -26,6 +26,7 @@
 		ACA79A5428B54B7000C19078 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = ACA79A5328B54B7000C19078 /* Collections */; };
 		ACA79A5628B54B7000C19078 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = ACA79A5528B54B7000C19078 /* DequeModule */; };
 		ACA79A5828B54B7000C19078 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = ACA79A5728B54B7000C19078 /* OrderedCollections */; };
+		ACA79A5D28B7E6C700C19078 /* NWWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = ACA79A5C28B7E6C700C19078 /* NWWebSocket */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 				ACA79A5428B54B7000C19078 /* Collections in Frameworks */,
 				ACA79A5628B54B7000C19078 /* DequeModule in Frameworks */,
 				ACA79A5828B54B7000C19078 /* OrderedCollections in Frameworks */,
+				ACA79A5D28B7E6C700C19078 /* NWWebSocket in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +216,7 @@
 				ACA79A5328B54B7000C19078 /* Collections */,
 				ACA79A5528B54B7000C19078 /* DequeModule */,
 				ACA79A5728B54B7000C19078 /* OrderedCollections */,
+				ACA79A5C28B7E6C700C19078 /* NWWebSocket */,
 			);
 			productName = TradingDashboard;
 			productReference = AC8078CE2893E1B200888287 /* TradingDashboard.app */;
@@ -289,6 +292,7 @@
 			mainGroup = AC8078C52893E1B200888287;
 			packageReferences = (
 				ACA79A5228B54B7000C19078 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				ACA79A5B28B7E6C700C19078 /* XCRemoteSwiftPackageReference "NWWebSocket" */,
 			);
 			productRefGroup = AC8078CF2893E1B200888287 /* Products */;
 			projectDirPath = "";
@@ -670,6 +674,14 @@
 				minimumVersion = 1.0.2;
 			};
 		};
+		ACA79A5B28B7E6C700C19078 /* XCRemoteSwiftPackageReference "NWWebSocket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pusher/NWWebSocket";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.5.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -687,6 +699,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ACA79A5228B54B7000C19078 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = OrderedCollections;
+		};
+		ACA79A5C28B7E6C700C19078 /* NWWebSocket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACA79A5B28B7E6C700C19078 /* XCRemoteSwiftPackageReference "NWWebSocket" */;
+			productName = NWWebSocket;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

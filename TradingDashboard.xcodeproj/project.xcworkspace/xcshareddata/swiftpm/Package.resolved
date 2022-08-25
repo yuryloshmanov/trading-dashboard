@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "nwwebsocket",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pusher/NWWebSocket",
+      "state" : {
+        "revision" : "eed470bc3607bc4893046f461107ec463dbd1220",
+        "version" : "0.5.2"
+      }
+    },
+    {
       "identity" : "swift-collections",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-collections.git",

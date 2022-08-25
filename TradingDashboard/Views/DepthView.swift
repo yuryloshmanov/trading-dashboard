@@ -4,7 +4,6 @@
 
 import SwiftUI
 
-
 struct Price: View {
     @State var checkState: Bool = false
 
@@ -140,51 +139,53 @@ struct DepthView: View {
 
     var body: some View {
         GeometryReader { geometry in
-            ScrollView(.vertical) {
-
-                VStack(spacing: 0) {
-                    if viewModel.aasks.isEmpty {
-                        ProgressView()
-                    } else {
-                        HStack {
-                            Text("Price")
-                            Spacer()
-                            Text("BTC")
-                        }
-                    }
-
-                    ForEach(viewModel.aasks.sorted(by: >).suffix(50), id: \.key) { k, v in
-                        if v > 0 {
-                            PriceLevel(k, v)
-                                .frame(width: geometry.size.width, height: 20)
-                        }
-                    }
-
-                    if !viewModel.aasks.isEmpty {
-                        Divider()
-                            .frame(width: geometry.size.width, height: 10)
-                    }
-
-                    ForEach(viewModel.bbids.sorted(by: >).prefix(50), id: \.key) { k, v in
-                        if v > 0 {
-                            PriceLevel(k, v)
-                                .frame(width: geometry.size.width, height: 20)
-                        }
+            VStack(spacing: 0) {
+                if !viewModel.aggAsks.isEmpty {
+                    HStack(spacing: 0) {
+                        Text("Price")
+                            .padding(.leading, 15)
+                        Spacer()
+                        Text("BTC")
+                            .padding(.trailing, 15)
                     }
                 }
-                    .padding()
-                    .frame(width: geometry.size.width)
-                    .frame(minHeight: geometry.size.height)
-            }
 
+                ScrollView(.vertical) {
+                    VStack(spacing: 0) {
+                        if viewModel.aggAsks.isEmpty {
+                            ProgressView()
+                        }
+
+                        ForEach(viewModel.aggAsks.sorted(by: >).suffix(50), id: \.key) { k, v in
+                            if v > 0 {
+                                PriceLevel(k, v)
+                                    .frame(width: geometry.size.width, height: 20)
+                            }
+                        }
+
+                        if !viewModel.aggAsks.isEmpty {
+                            Divider()
+                                .frame(width: geometry.size.width, height: 10)
+                        }
+
+                        ForEach(viewModel.aggBids.sorted(by: >).prefix(50), id: \.key) { k, v in
+                            if v > 0 {
+                                PriceLevel(k, v)
+                                    .frame(width: geometry.size.width, height: 20)
+                            }
+                        }
+                    }
+                        .padding()
+                        .frame(width: geometry.size.width)
+                        .frame(minHeight: geometry.size.height)
+                }
+
+            }
+                .onAppear {
+                    isLoading = true
+                    viewModel.start()
+                }
         }
-            .onAppear {
-                isLoading = true
-                viewModel.listenServer()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    viewModel.getSnapshot()
-                }
-            }
     }
 
     init() {

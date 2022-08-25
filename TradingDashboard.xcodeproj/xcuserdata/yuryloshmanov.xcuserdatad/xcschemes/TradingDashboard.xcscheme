@@ -57,6 +57,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "AC8078CD2893E1B200888287"
+            BuildableName = "TradingDashboard.app"
+            BlueprintName = "TradingDashboard"
+            ReferencedContainer = "container:TradingDashboard.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

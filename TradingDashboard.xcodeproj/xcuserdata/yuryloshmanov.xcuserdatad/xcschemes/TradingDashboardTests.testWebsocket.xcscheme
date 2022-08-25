@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   version = "1.3">
+   <BuildAction>
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AC8078DE2893E1B200888287"
+               BuildableName = "TradingDashboardTests.xctest"
+               BlueprintName = "TradingDashboardTests"
+               ReferencedContainer = "container:TradingDashboard.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug">
+      <Testables>
+         <TestableReference>
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AC8078DE2893E1B200888287"
+               BuildableName = "TradingDashboardTests.xctest"
+               BlueprintName = "TradingDashboardTests"
+               ReferencedContainer = "container:TradingDashboard.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
+   </TestAction>
+   <LaunchAction
+      useCustomWorkingDirectory = "NO"
+      allowLocationSimulation = "YES">
+   </LaunchAction>
+</Scheme>
