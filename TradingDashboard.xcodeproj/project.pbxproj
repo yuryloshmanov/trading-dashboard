@@ -7,13 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		17406141E5904C36421890B8 /* TradesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406C669064A6E34AEDA16F /* TradesModel.swift */; };
 		17406144EFEA4CF84AB03109 /* TradesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406C6E3ED60252294C6487 /* TradesViewModel.swift */; };
+		174062D87A35B8483E24FEB0 /* TradingType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1740633A387C973FFF88DBCC /* TradingType.swift */; };
 		1740640BC89074D4A8E5FD82 /* LiquidationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406D5A9B47F0568AA62F31 /* LiquidationsViewModel.swift */; };
 		174064A580DDD9D9769CE61C /* LiquidationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406262AD5DEF0C07D16174 /* LiquidationsView.swift */; };
 		17406556DB5AB81DE07283F9 /* DepthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406ED179D94B6AB563E12A /* DepthView.swift */; };
 		174065A304BB1FCDFEC61B6F /* TradesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406206F0627D5BC84E73EA /* TradesView.swift */; };
 		17406A682E0287467949C1C3 /* DepthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174067AF02B71FBDFB961E90 /* DepthViewModel.swift */; };
+		AC00592D28B81A39001A13F7 /* ExchangeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00592C28B81A39001A13F7 /* ExchangeService.swift */; };
+		AC00593028B81AC6001A13F7 /* BinanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00592F28B81AC6001A13F7 /* BinanceService.swift */; };
 		AC8078D22893E1B200888287 /* TradingDashboardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8078D12893E1B200888287 /* TradingDashboardApp.swift */; };
 		AC8078D42893E1B200888287 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8078D32893E1B200888287 /* ContentView.swift */; };
 		AC8078D62893E1B200888287 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC8078D52893E1B200888287 /* Assets.xcassets */; };
@@ -49,11 +51,13 @@
 /* Begin PBXFileReference section */
 		17406206F0627D5BC84E73EA /* TradesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesView.swift; sourceTree = "<group>"; };
 		17406262AD5DEF0C07D16174 /* LiquidationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiquidationsView.swift; sourceTree = "<group>"; };
+		1740633A387C973FFF88DBCC /* TradingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingType.swift; sourceTree = "<group>"; };
 		174067AF02B71FBDFB961E90 /* DepthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepthViewModel.swift; sourceTree = "<group>"; };
-		17406C669064A6E34AEDA16F /* TradesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesModel.swift; sourceTree = "<group>"; };
 		17406C6E3ED60252294C6487 /* TradesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesViewModel.swift; sourceTree = "<group>"; };
 		17406D5A9B47F0568AA62F31 /* LiquidationsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiquidationsViewModel.swift; sourceTree = "<group>"; };
 		17406ED179D94B6AB563E12A /* DepthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepthView.swift; sourceTree = "<group>"; };
+		AC00592C28B81A39001A13F7 /* ExchangeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeService.swift; sourceTree = "<group>"; };
+		AC00592F28B81AC6001A13F7 /* BinanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceService.swift; sourceTree = "<group>"; };
 		AC8078CE2893E1B200888287 /* TradingDashboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TradingDashboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC8078D12893E1B200888287 /* TradingDashboardApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradingDashboardApp.swift; sourceTree = "<group>"; };
 		AC8078D32893E1B200888287 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -98,6 +102,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC00592B28B819F3001A13F7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AC00592C28B81A39001A13F7 /* ExchangeService.swift */,
+				1740633A387C973FFF88DBCC /* TradingType.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AC00592E28B81A93001A13F7 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AC00592F28B81AC6001A13F7 /* BinanceService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		AC8078C52893E1B200888287 = {
 			isa = PBXGroup;
 			children = (
@@ -121,9 +142,10 @@
 		AC8078D02893E1B200888287 /* TradingDashboard */ = {
 			isa = PBXGroup;
 			children = (
-				ACC1FA8F289946C500181B95 /* Models */,
+				AC00592B28B819F3001A13F7 /* Models */,
 				ACC1FA8E289946BA00181B95 /* Views */,
 				ACC1FA90289946CD00181B95 /* ViewModels */,
+				AC00592E28B81A93001A13F7 /* Services */,
 				AC8078FC2895644C00888287 /* Heatmap */,
 				AC8078D12893E1B200888287 /* TradingDashboardApp.swift */,
 				AC8078D32893E1B200888287 /* ContentView.swift */,
@@ -176,14 +198,6 @@
 				17406ED179D94B6AB563E12A /* DepthView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		ACC1FA8F289946C500181B95 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				17406C669064A6E34AEDA16F /* TradesModel.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 		ACC1FA90289946CD00181B95 /* ViewModels */ = {
@@ -340,13 +354,15 @@
 				AC8078FE2895646D00888287 /* LiquidityColor.swift in Sources */,
 				AC8078D22893E1B200888287 /* TradingDashboardApp.swift in Sources */,
 				AC8079002895654000888287 /* HeatmapView.swift in Sources */,
-				17406141E5904C36421890B8 /* TradesModel.swift in Sources */,
 				174065A304BB1FCDFEC61B6F /* TradesView.swift in Sources */,
+				AC00592D28B81A39001A13F7 /* ExchangeService.swift in Sources */,
 				17406144EFEA4CF84AB03109 /* TradesViewModel.swift in Sources */,
 				174064A580DDD9D9769CE61C /* LiquidationsView.swift in Sources */,
+				AC00593028B81AC6001A13F7 /* BinanceService.swift in Sources */,
 				1740640BC89074D4A8E5FD82 /* LiquidationsViewModel.swift in Sources */,
 				17406556DB5AB81DE07283F9 /* DepthView.swift in Sources */,
 				17406A682E0287467949C1C3 /* DepthViewModel.swift in Sources */,
+				174062D87A35B8483E24FEB0 /* TradingType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -137,6 +137,8 @@ struct DepthView: View {
     @State var isLoading: Bool
     @ObservedObject var viewModel: DepthViewModel
 
+    var size: Int = 50
+
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
@@ -156,7 +158,7 @@ struct DepthView: View {
                             ProgressView()
                         }
 
-                        ForEach(viewModel.aggAsks.sorted(by: >).suffix(50), id: \.key) { k, v in
+                        ForEach(viewModel.aggAsks.sorted(by: >).suffix(size), id: \.key) { k, v in
                             if v > 0 {
                                 PriceLevel(k, v)
                                     .frame(width: geometry.size.width, height: 20)
@@ -168,7 +170,7 @@ struct DepthView: View {
                                 .frame(width: geometry.size.width, height: 10)
                         }
 
-                        ForEach(viewModel.aggBids.sorted(by: >).prefix(50), id: \.key) { k, v in
+                        ForEach(viewModel.aggBids.sorted(by: >).prefix(size), id: \.key) { k, v in
                             if v > 0 {
                                 PriceLevel(k, v)
                                     .frame(width: geometry.size.width, height: 20)
