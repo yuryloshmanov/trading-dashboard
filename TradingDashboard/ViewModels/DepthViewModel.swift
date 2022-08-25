@@ -10,8 +10,36 @@ import NWWebSocket
 
 extension DepthView {
     class DepthViewModel: ObservableObject {
-        private(set) var bids: [Double: Double]
-        private(set) var asks: [Double: Double]
+        class BinanceManager {
+            let socket: NWWebSocket!
+
+            var dataFetched: Bool
+            var lastUpdateId: UInt64
+            var flag: Bool
+            var buffer: [[String: Any]]
+
+            init() {
+                dataFetched = false
+                lastUpdateId = 0
+                flag = true
+                buffer = .init()
+
+                let serverURL = URL(string: "wss://fstream.binance.com/stream?streams=btcusdt@depth")!
+                socket = NWWebSocket(url: serverURL)
+                socket.delegate = self
+            }
+
+            func start() {
+                socket.connect()
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
+                    getSnapshot()
+                }
+            }
+        }
+
+        private(set) static var bids: [Double: Double] = [:]
+        private(set) static var asks: [Double: Double] = [:]
 
         private(set) var aggBids: [Double: Double]
         private(set) var aggAsks: [Double: Double]
@@ -19,8 +47,7 @@ extension DepthView {
         var grouping: Int = 5
 
 
-        @Published var dataFetched: Bool
-        var buffer: [[String: Any]]
+//        @Published var dataFetched: Bool
         var lastUpdateId: UInt64
 
         @Published var index: Int = 0
@@ -35,7 +62,7 @@ extension DepthView {
         func refresh() {
             aggAsks = [:]
             aggBids = [:]
-            for bid in bids {
+            for bid in Self.bids {
                 if bid.1 == 0 {
                     continue
                 }
@@ -50,7 +77,7 @@ extension DepthView {
             }
 
 
-            for ask in asks {
+            for ask in Self.asks {
                 if ask.1 == 0 {
                     continue
                 }
@@ -68,26 +95,17 @@ extension DepthView {
 //            now = Date()
         }
 
-        var socket: NWWebSocket!
-
+        var binance: BinanceManager
 
         func start() {
-            let serverURL = URL(string: "wss://fstream.binance.com/stream?streams=btcusdt@depth")!
-            socket = NWWebSocket(url: serverURL)
-            socket.delegate = self
-
-            socket.connect()
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
-                getSnapshot()
-            }
+            binance.start()
         }
 
         init() {
-            bids = [:]
-            asks = [:]
-            dataFetched = false
-            buffer = []
+            binance = BinanceManager()
+            Self.bids = [:]
+            Self.asks = [:]
+//            dataFetched = false
             aggAsks = [:]
             aggBids = [:]
 
@@ -97,81 +115,85 @@ extension DepthView {
                 self.refresh()
             })
         }
-
-        var flag: Bool = true
-
-
-        func getSnapshot() -> Void {
-            fetchData { [self] (dict, error) in
-                if let dict = dict {
-                    lastUpdateId = dict["lastUpdateId"] as! UInt64
-                    let b: [[String]] = dict["bids"] as! [[String]]
-                    let a: [[String]] = dict["asks"] as! [[String]]
-
-                    for bid in b {
-                        bids[Double(bid[0])!] = Double(bid[1])!
-                    }
-
-                    for ask in a {
-                        asks[Double(ask[0])!] = Double(ask[1])!
-                    }
-
-                    for item in buffer {
-                        let u: UInt64 = (item["data"] as! [String: Any])["u"] as! UInt64
-
-                        if u < lastUpdateId {
-//                            print("<")
-                            continue
-                        }
-
-                        if let b = (item["data"] as! [String: Any])["b"] as? [[String]],
-                           let a = (item["data"] as! [String: Any])["a"] as? [[String]] {
-
-                            DispatchQueue.main.async { [self] in
-                                for bid in b {
-                                    bids[Double(bid[0])!] = Double(bid[1])!
-                                }
-
-                                for ask in a {
-                                    asks[Double(ask[0])!] = Double(ask[1])!
-                                }
-                            }
-
-                        }
-                    }
-
-                    dataFetched = true
-                    buffer = []
-                }
-            }
-
-        }
-
-        func fetchData(completion: @escaping ([String: Any]?, Error?) -> Void) {
-            let url = URL(string: "https://fapi.binance.com/fapi/v1/depth?symbol=BTCUSDT&limit=1000")!
-
-            let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-                guard let data = data else {
-                    return
-                }
-
-                do {
-                    if let array = try JSONSerialization.jsonObject(
-                            with: data, options: .allowFragments
-                    ) as? [String: Any] {
-                        completion(array, nil)
-                    }
-                } catch {
-                    print(error)
-                    completion(nil, error)
-                }
-            }
-            task.resume()
-        }
     }
 }
 
-extension DepthView.DepthViewModel: WebSocketConnectionDelegate {
+// MARK: - Extension
+extension DepthView.DepthViewModel.BinanceManager {
+    func getSnapshot() -> Void {
+        fetchData { [self] (dict, error) in
+            if let dict = dict {
+                lastUpdateId = dict["lastUpdateId"] as! UInt64
+                let b: [[String]] = dict["bids"] as! [[String]]
+                let a: [[String]] = dict["asks"] as! [[String]]
+
+                for bid in b {
+                    DepthView.DepthViewModel.bids[Double(bid[0])!] = Double(bid[1])!
+                }
+
+                for ask in a {
+                    DepthView.DepthViewModel.asks[Double(ask[0])!] = Double(ask[1])!
+                }
+
+                for item in buffer {
+                    let u: UInt64 = (item["data"] as! [String: Any])["u"] as! UInt64
+
+                    if u < lastUpdateId {
+//                            print("<")
+                        continue
+                    }
+
+                    if let b = (item["data"] as! [String: Any])["b"] as? [[String]],
+                       let a = (item["data"] as! [String: Any])["a"] as? [[String]] {
+
+                        DispatchQueue.main.async { [self] in
+                            for bid in b {
+                                DepthView.DepthViewModel.bids[Double(bid[0])!] = Double(bid[1])!
+                            }
+
+                            for ask in a {
+                                DepthView.DepthViewModel.asks[Double(ask[0])!] = Double(ask[1])!
+                            }
+                        }
+
+                    }
+                }
+
+                DispatchQueue.main.async { [self] in
+                    dataFetched = true
+                }
+
+                buffer = []
+            }
+        }
+
+    }
+
+    func fetchData(completion: @escaping ([String: Any]?, Error?) -> Void) {
+        let url = URL(string: "https://fapi.binance.com/fapi/v1/depth?symbol=BTCUSDT&limit=1000")!
+
+        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else {
+                return
+            }
+
+            do {
+                if let array = try JSONSerialization.jsonObject(
+                        with: data, options: .allowFragments
+                ) as? [String: Any] {
+                    completion(array, nil)
+                }
+            } catch {
+                print(error)
+                completion(nil, error)
+            }
+        }
+        task.resume()
+    }
+}
+
+
+extension DepthView.DepthViewModel.BinanceManager: WebSocketConnectionDelegate {
     func webSocketDidConnect(connection: WebSocketConnection) {
         // Respond to a WebSocket connection event
     }
@@ -224,17 +246,11 @@ extension DepthView.DepthViewModel: WebSocketConnectionDelegate {
                                 let priceLevel: Double = Double(bid[0])!
                                 let quantity: Double = Double(bid[1])!
 
-//                                                        if quantity == 0 {
-//                                                            if let index = bids.index(forKey: priceLevel) {
-//                                                                bids.remove(at: index)
-//                                                            }
-//                                                        }
-
-                                bids[priceLevel] = quantity
+                                DepthView.DepthViewModel.bids[priceLevel] = quantity
                             }
 
                             for ask in a {
-                                asks[Double(ask[0])!] = Double(ask[1])!
+                                DepthView.DepthViewModel.asks[Double(ask[0])!] = Double(ask[1])!
                             }
                         }
 
