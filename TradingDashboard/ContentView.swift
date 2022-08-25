@@ -9,6 +9,7 @@ import SwiftUI
 
 import Foundation
 import CoreFoundation
+
 typealias OrderBook = [String: [Int: Double]]
 
 
@@ -60,22 +61,43 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List {
-                
-                Section("Tools") {
-                    Spacer()
-                    NavigationLink {
-                        HeatmapView()
-                    } label: {
-                        Text("Heatmap")
-                    }
-                    NavigationLink {
-                        LiquidationView()
-                    } label: {
-                        Text("Liquidations")
-                    }
+                Spacer()
+                NavigationLink {
+                    HeatmapView()
+                } label: {
+                    Text("HEATMAP")
+                        .font(.system(size: 15))
                 }
-                .listStyle(SidebarListStyle())
+                NavigationLink {
+                    LiquidationsView()
+                } label: {
+                    Text("LIQUIDATIONS")
+                        .font(.system(size: 15))
+                }
+                NavigationLink {
+                    GeometryReader { geometry in
+                        HStack(spacing: 0) {
+                            HeatmapView()
+                                .frame(minWidth: 800)
+                            VStack(spacing: 0) {
+                                TradesView()
+                                LiquidationsView()
+                            }
+                        }
+                    }
+                } label: {
+                    Text("TRADES")
+                        .font(.system(size: 15))
+                }
+
+                NavigationLink {
+                    DepthView()
+                } label: {
+                    Text("DEPTH")
+                        .font(.system(size: 15))
+                }
             }
+            .listStyle(SidebarListStyle())
         }
         
         
