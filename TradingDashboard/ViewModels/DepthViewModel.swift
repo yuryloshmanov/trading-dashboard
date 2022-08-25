@@ -8,8 +8,18 @@ import Network
 import NWWebSocket
 
 
+protocol Exchange {
+    var bids: [Double: Double] { get }
+    var asks: [Double: Double] { get }
+
+    func start()
+}
+
+
 extension DepthView {
     class DepthViewModel: ObservableObject {
+
+
         class BinanceManager {
             let socket: NWWebSocket!
 
@@ -17,6 +27,9 @@ extension DepthView {
             var lastUpdateId: UInt64
             var flag: Bool
             var buffer: [[String: Any]]
+
+            var bids: [Double: Double] = [:]
+            var asks: [Double: Double] = [:]
 
             init() {
                 dataFetched = false
@@ -30,6 +43,7 @@ extension DepthView {
             }
 
             func start() {
+                print("Binance start")
                 socket.connect()
 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
@@ -38,8 +52,9 @@ extension DepthView {
             }
         }
 
-        private(set) static var bids: [Double: Double] = [:]
-        private(set) static var asks: [Double: Double] = [:]
+//        private(set) static var bids: [Double: Double] = [:]
+
+//        private(set) static var asks: [Double: Double] = [:]
 
         private(set) var aggBids: [Double: Double]
         private(set) var aggAsks: [Double: Double]
@@ -55,6 +70,8 @@ extension DepthView {
 
         var timer: Timer?
 
+        var exchanges: [BinanceManager]
+
         deinit {
             timer?.invalidate()
         }
@@ -62,49 +79,58 @@ extension DepthView {
         func refresh() {
             aggAsks = [:]
             aggBids = [:]
-            for bid in Self.bids {
-                if bid.1 == 0 {
-                    continue
+
+            for exchange in exchanges {
+                for bid in exchange.bids {
+                    if bid.1 == 0 {
+                        continue
+                    }
+
+                    let price: Double = bid.0.rounded() - Double(Int(bid.0.rounded()) % grouping)
+
+                    if aggBids[price] == nil {
+                        aggBids[price] = 0
+                    }
+
+                    aggBids[price]! += bid.1
                 }
 
-                let price: Double = bid.0.rounded() - Double(Int(bid.0.rounded()) % grouping)
 
-                if aggBids[price] == nil {
-                    aggBids[price] = 0
+                for ask in exchange.asks {
+                    if ask.1 == 0 {
+                        continue
+                    }
+
+                    let price: Double = ask.0.rounded() - Double(Int(ask.0.rounded()) % grouping)
+
+                    if aggAsks[price] == nil {
+                        aggAsks[price] = 0
+                    }
+
+                    aggAsks[price]! += ask.1
                 }
-
-                aggBids[price]! += bid.1
-            }
-
-
-            for ask in Self.asks {
-                if ask.1 == 0 {
-                    continue
-                }
-
-                let price: Double = ask.0.rounded() - Double(Int(ask.0.rounded()) % grouping)
-
-                if aggAsks[price] == nil {
-                    aggAsks[price] = 0
-                }
-
-                aggAsks[price]! += ask.1
             }
 
             index += 1
 //            now = Date()
         }
 
-        var binance: BinanceManager
+//        var binance: BinanceManager
 
         func start() {
-            binance.start()
+            for exchange in exchanges {
+                exchange.start()
+            }
+//            binance.start()
         }
 
         init() {
-            binance = BinanceManager()
-            Self.bids = [:]
-            Self.asks = [:]
+            exchanges = [
+                BinanceManager()
+            ]
+//            binance = BinanceManager()
+//            Self.bids = [:]
+//            Self.asks = [:]
 //            dataFetched = false
             aggAsks = [:]
             aggBids = [:]
@@ -119,8 +145,10 @@ extension DepthView {
 }
 
 // MARK: - Extension
+
 extension DepthView.DepthViewModel.BinanceManager {
     func getSnapshot() -> Void {
+        print("Getting snapshot")
         fetchData { [self] (dict, error) in
             if let dict = dict {
                 lastUpdateId = dict["lastUpdateId"] as! UInt64
@@ -128,11 +156,11 @@ extension DepthView.DepthViewModel.BinanceManager {
                 let a: [[String]] = dict["asks"] as! [[String]]
 
                 for bid in b {
-                    DepthView.DepthViewModel.bids[Double(bid[0])!] = Double(bid[1])!
+                    bids[Double(bid[0])!] = Double(bid[1])!
                 }
 
                 for ask in a {
-                    DepthView.DepthViewModel.asks[Double(ask[0])!] = Double(ask[1])!
+                    asks[Double(ask[0])!] = Double(ask[1])!
                 }
 
                 for item in buffer {
@@ -148,11 +176,11 @@ extension DepthView.DepthViewModel.BinanceManager {
 
                         DispatchQueue.main.async { [self] in
                             for bid in b {
-                                DepthView.DepthViewModel.bids[Double(bid[0])!] = Double(bid[1])!
+                                bids[Double(bid[0])!] = Double(bid[1])!
                             }
 
                             for ask in a {
-                                DepthView.DepthViewModel.asks[Double(ask[0])!] = Double(ask[1])!
+                                asks[Double(ask[0])!] = Double(ask[1])!
                             }
                         }
 
@@ -196,6 +224,7 @@ extension DepthView.DepthViewModel.BinanceManager {
 extension DepthView.DepthViewModel.BinanceManager: WebSocketConnectionDelegate {
     func webSocketDidConnect(connection: WebSocketConnection) {
         // Respond to a WebSocket connection event
+        print("Connected")
     }
 
     func webSocketDidDisconnect(connection: WebSocketConnection,
@@ -205,6 +234,7 @@ extension DepthView.DepthViewModel.BinanceManager: WebSocketConnectionDelegate {
 
     func webSocketViabilityDidChange(connection: WebSocketConnection, isViable: Bool) {
         // Respond to a WebSocket connection viability change event
+        print("via")
     }
 
     func webSocketDidAttemptBetterPathMigration(result: Result<WebSocketConnection, NWError>) {
@@ -221,6 +251,7 @@ extension DepthView.DepthViewModel.BinanceManager: WebSocketConnectionDelegate {
     }
 
     func webSocketDidReceiveMessage(connection: WebSocketConnection, string: String) {
+        print("Msg")
         do {
             if let jsonArray = try JSONSerialization.jsonObject(
                     with: string.data(using: .utf8)!,
@@ -246,11 +277,11 @@ extension DepthView.DepthViewModel.BinanceManager: WebSocketConnectionDelegate {
                                 let priceLevel: Double = Double(bid[0])!
                                 let quantity: Double = Double(bid[1])!
 
-                                DepthView.DepthViewModel.bids[priceLevel] = quantity
+                                bids[priceLevel] = quantity
                             }
 
                             for ask in a {
-                                DepthView.DepthViewModel.asks[Double(ask[0])!] = Double(ask[1])!
+                                asks[Double(ask[0])!] = Double(ask[1])!
                             }
                         }
 
