@@ -87,6 +87,7 @@ struct Divider: View {
     }
 }
 
+
 struct Arrow: Shape {
     func path(in rect: CGRect) -> Path {
         Path { path in
@@ -133,11 +134,12 @@ struct PriceLevel: View {
     }
 }
 
+
 struct DepthView: View {
     @State var isLoading: Bool
     @ObservedObject var viewModel: DepthViewModel
 
-    var size: Int = 50
+    var size: Int = 100
 
     var body: some View {
         GeometryReader { geometry in

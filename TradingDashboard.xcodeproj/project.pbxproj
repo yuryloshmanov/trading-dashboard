@@ -14,6 +14,11 @@
 		17406556DB5AB81DE07283F9 /* DepthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406ED179D94B6AB563E12A /* DepthView.swift */; };
 		174065A304BB1FCDFEC61B6F /* TradesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406206F0627D5BC84E73EA /* TradesView.swift */; };
 		17406A682E0287467949C1C3 /* DepthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174067AF02B71FBDFB961E90 /* DepthViewModel.swift */; };
+		17406AA49963D665E06286BD /* SpotDepth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406FE7447402E42578523C /* SpotDepth.swift */; };
+		17406AB3F5B80CF611E186E7 /* SpotDepthStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174061BAB5258EDC156C9925 /* SpotDepthStream.swift */; };
+		17406ABD43A87E4B8861E71B /* DepthStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406BAA3D7921E95318ADA5 /* DepthStream.swift */; };
+		17406F5BB1A3B342DA1A5631 /* Depth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174062F92E9BF44103923887 /* Depth.swift */; };
+		17406F6D03D399D5768DFD83 /* FuturesDepth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1740635DB2E1E709F9C9F5F0 /* FuturesDepth.swift */; };
 		AC00592D28B81A39001A13F7 /* ExchangeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00592C28B81A39001A13F7 /* ExchangeService.swift */; };
 		AC00593028B81AC6001A13F7 /* BinanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00592F28B81AC6001A13F7 /* BinanceService.swift */; };
 		AC8078D22893E1B200888287 /* TradingDashboardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8078D12893E1B200888287 /* TradingDashboardApp.swift */; };
@@ -29,6 +34,7 @@
 		ACA79A5628B54B7000C19078 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = ACA79A5528B54B7000C19078 /* DequeModule */; };
 		ACA79A5828B54B7000C19078 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = ACA79A5728B54B7000C19078 /* OrderedCollections */; };
 		ACA79A5D28B7E6C700C19078 /* NWWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = ACA79A5C28B7E6C700C19078 /* NWWebSocket */; };
+		ACF56F1A28BBD6FB000DE227 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = ACF56F1928BBD6FB000DE227 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,13 +55,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		174061BAB5258EDC156C9925 /* SpotDepthStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotDepthStream.swift; sourceTree = "<group>"; };
 		17406206F0627D5BC84E73EA /* TradesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesView.swift; sourceTree = "<group>"; };
 		17406262AD5DEF0C07D16174 /* LiquidationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiquidationsView.swift; sourceTree = "<group>"; };
+		174062F92E9BF44103923887 /* Depth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Depth.swift; sourceTree = "<group>"; };
 		1740633A387C973FFF88DBCC /* TradingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingType.swift; sourceTree = "<group>"; };
+		1740635DB2E1E709F9C9F5F0 /* FuturesDepth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuturesDepth.swift; sourceTree = "<group>"; };
 		174067AF02B71FBDFB961E90 /* DepthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepthViewModel.swift; sourceTree = "<group>"; };
+		17406BAA3D7921E95318ADA5 /* DepthStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepthStream.swift; sourceTree = "<group>"; };
 		17406C6E3ED60252294C6487 /* TradesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesViewModel.swift; sourceTree = "<group>"; };
 		17406D5A9B47F0568AA62F31 /* LiquidationsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiquidationsViewModel.swift; sourceTree = "<group>"; };
 		17406ED179D94B6AB563E12A /* DepthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepthView.swift; sourceTree = "<group>"; };
+		17406FE7447402E42578523C /* SpotDepth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotDepth.swift; sourceTree = "<group>"; };
 		AC00592C28B81A39001A13F7 /* ExchangeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExchangeService.swift; sourceTree = "<group>"; };
 		AC00592F28B81AC6001A13F7 /* BinanceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinanceService.swift; sourceTree = "<group>"; };
 		AC8078CE2893E1B200888287 /* TradingDashboard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TradingDashboard.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +89,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACF56F1A28BBD6FB000DE227 /* Alamofire in Frameworks */,
 				ACA79A5428B54B7000C19078 /* Collections in Frameworks */,
 				ACA79A5628B54B7000C19078 /* DequeModule in Frameworks */,
 				ACA79A5828B54B7000C19078 /* OrderedCollections in Frameworks */,
@@ -102,11 +114,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		17406191BCD952FD722F41CA /* API */ = {
+			isa = PBXGroup;
+			children = (
+				174065F37DAEF6EAAD0DAACC /* Binance */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		174065F37DAEF6EAAD0DAACC /* Binance */ = {
+			isa = PBXGroup;
+			children = (
+				17406BAA3D7921E95318ADA5 /* DepthStream.swift */,
+				1740635DB2E1E709F9C9F5F0 /* FuturesDepth.swift */,
+				174061BAB5258EDC156C9925 /* SpotDepthStream.swift */,
+				17406FE7447402E42578523C /* SpotDepth.swift */,
+				174062F92E9BF44103923887 /* Depth.swift */,
+			);
+			path = Binance;
+			sourceTree = "<group>";
+		};
 		AC00592B28B819F3001A13F7 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				AC00592C28B81A39001A13F7 /* ExchangeService.swift */,
 				1740633A387C973FFF88DBCC /* TradingType.swift */,
+				17406191BCD952FD722F41CA /* API */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -231,6 +264,7 @@
 				ACA79A5528B54B7000C19078 /* DequeModule */,
 				ACA79A5728B54B7000C19078 /* OrderedCollections */,
 				ACA79A5C28B7E6C700C19078 /* NWWebSocket */,
+				ACF56F1928BBD6FB000DE227 /* Alamofire */,
 			);
 			productName = TradingDashboard;
 			productReference = AC8078CE2893E1B200888287 /* TradingDashboard.app */;
@@ -307,6 +341,7 @@
 			packageReferences = (
 				ACA79A5228B54B7000C19078 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				ACA79A5B28B7E6C700C19078 /* XCRemoteSwiftPackageReference "NWWebSocket" */,
+				ACF56F1828BBD6FB000DE227 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = AC8078CF2893E1B200888287 /* Products */;
 			projectDirPath = "";
@@ -363,6 +398,11 @@
 				17406556DB5AB81DE07283F9 /* DepthView.swift in Sources */,
 				17406A682E0287467949C1C3 /* DepthViewModel.swift in Sources */,
 				174062D87A35B8483E24FEB0 /* TradingType.swift in Sources */,
+				17406ABD43A87E4B8861E71B /* DepthStream.swift in Sources */,
+				17406F6D03D399D5768DFD83 /* FuturesDepth.swift in Sources */,
+				17406AB3F5B80CF611E186E7 /* SpotDepthStream.swift in Sources */,
+				17406AA49963D665E06286BD /* SpotDepth.swift in Sources */,
+				17406F5BB1A3B342DA1A5631 /* Depth.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -698,6 +738,14 @@
 				minimumVersion = 0.5.2;
 			};
 		};
+		ACF56F1828BBD6FB000DE227 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -720,6 +768,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ACA79A5B28B7E6C700C19078 /* XCRemoteSwiftPackageReference "NWWebSocket" */;
 			productName = NWWebSocket;
+		};
+		ACF56F1928BBD6FB000DE227 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACF56F1828BBD6FB000DE227 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

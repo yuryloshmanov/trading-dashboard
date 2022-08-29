@@ -15,7 +15,6 @@ extension DepthView {
 
         var grouping: Int = 5
 
-//        @Published var dataFetched: Bool
         var lastUpdateId: UInt64
 
         @Published var index: UInt = 0
@@ -74,10 +73,10 @@ extension DepthView {
 
         init() {
             exchangeServices = [
-                BinanceService(.spot, "btcusdt"),
-                BinanceService(.spot, "btcbusd"),
-                BinanceService(.futures, "btcusdt"),
-                BinanceService(.futures, "btcbusd")
+//                BinanceService(.spot, .BTCUSDT),
+//                BinanceService(.spot, .BTCBUSD),
+                BinanceService(.futures, .BTCUSDT),
+                BinanceService(.futures, .BTCBUSD)
             ]
 
             aggAsks = [:]
@@ -91,4 +90,3 @@ extension DepthView {
         }
     }
 }
-

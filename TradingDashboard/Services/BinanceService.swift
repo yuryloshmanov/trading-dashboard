@@ -8,6 +8,7 @@
 import Foundation
 import Network
 import NWWebSocket
+import Alamofire
 
 class BinanceService: ExchangeService {
     private let socket: NWWebSocket!
@@ -15,15 +16,20 @@ class BinanceService: ExchangeService {
     private(set) var dataFetched: Bool
     private var lastUpdateId: UInt64
     private var flag: Bool
-    private var buffer: [[String: Any]]
+    private var buffer: [DepthStream]
 
     private(set) var bids: [Double: Double] = [:]
     private(set) var asks: [Double: Double] = [:]
 
     let tradingType: TradingType
-    let market: String
+    let market: Market
 
-    init(_ tradingType: TradingType, _ market: String) {
+    enum Market: String {
+        case BTCUSDT = "btcusdt"
+        case BTCBUSD = "btcbusd"
+    }
+
+    init(_ tradingType: TradingType, _ market: Market) {
         self.tradingType = tradingType
         self.market = market
 
@@ -36,9 +42,9 @@ class BinanceService: ExchangeService {
 
         switch tradingType {
         case .spot:
-            serverURL = URL(string: "wss://stream.binance.com:9443/ws/\(market)@depth")!
+            serverURL = URL(string: "wss://stream.binance.com:9443/ws/\(market.rawValue)@depth")!
         case .futures:
-            serverURL = URL(string: "wss://fstream.binance.com/stream?streams=\(market)@depth")!
+            serverURL = URL(string: "wss://fstream.binance.com/stream?streams=\(market.rawValue)@depth")!
         }
 
         socket = NWWebSocket(url: serverURL)
@@ -49,7 +55,12 @@ class BinanceService: ExchangeService {
         socket.connect()
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) { [self] in
-            getSnapshot()
+            switch tradingType {
+            case .spot:
+                getSnapshot(SpotDepth.self)
+            case .futures:
+                getSnapshot(FuturesDepth.self)
+            }
         }
     }
 }
@@ -58,45 +69,73 @@ class BinanceService: ExchangeService {
 // MARK: - Extension
 
 extension BinanceService {
-    func getSnapshot() -> Void {
-        fetchData { [self] (dict, error) in
-            if let dict = dict {
-                lastUpdateId = dict["lastUpdateId"] as! UInt64
-                let b: [[String]] = dict["bids"] as! [[String]]
-                let a: [[String]] = dict["asks"] as! [[String]]
+    func getSnapshot<T: Depth>(_ type: T.Type = T.self) -> Void {
+        let url: String
 
-                for bid in b {
-                    bids[Double(bid[0])!] = Double(bid[1])!
+        switch tradingType {
+        case .spot:
+            url = "https://api.binance.com/api/v3/depth?symbol=\(market.rawValue.uppercased())&limit=1000"
+        case .futures:
+            url = "https://fapi.binance.com/fapi/v1/depth?symbol=\(market.rawValue.uppercased())&limit=1000"
+        }
+
+        let request = AF.request(url)
+
+        request.responseDecodable(of: T.self) { [self] data in
+            if let depth = data.value {
+                for bid in depth.bids {
+                    var priceLevel = Double(bid[0])!
+                    let quantity = Double(bid[1])!
+
+                    if tradingType == .spot {
+                        priceLevel -= 10
+                    }
+
+                    bids[priceLevel] = quantity
                 }
 
-                for ask in a {
-                    asks[Double(ask[0])!] = Double(ask[1])!
+                for ask in depth.asks {
+                    var priceLevel = Double(ask[0])!
+                    let quantity = Double(ask[1])!
+
+                    if tradingType == .spot {
+                        priceLevel -= 10
+                    }
+
+                    asks[priceLevel] = quantity
                 }
 
                 for item in buffer {
-                    let data = (tradingType == .spot) ? (item) : (item["data"] as! [String: Any])
 
-
-                    let u: UInt64 = data["u"] as! UInt64
-
-                    if u < lastUpdateId {
+                    if item.u < lastUpdateId {
                         continue
                     }
 
-                    if let b = data["b"] as? [[String]],
-                       let a = data["a"] as? [[String]] {
 
-                        DispatchQueue.main.async { [self] in
-                            for bid in b {
-                                bids[Double(bid[0])!] = Double(bid[1])!
+                    DispatchQueue.main.async { [self] in
+                        for bid in item.b {
+                            var priceLevel = Double(bid[0])!
+                            let quantity = Double(bid[1])!
+
+                            if tradingType == .spot {
+                                priceLevel -= 10
                             }
 
-                            for ask in a {
-                                asks[Double(ask[0])!] = Double(ask[1])!
-                            }
+                            bids[priceLevel] = quantity
                         }
 
+                        for ask in item.a {
+                            var priceLevel = Double(ask[0])!
+                            let quantity = Double(ask[1])!
+
+                            if tradingType == .spot {
+                                priceLevel -= 10
+                            }
+
+                            asks[priceLevel] = quantity
+                        }
                     }
+
                 }
 
                 DispatchQueue.main.async { [self] in
@@ -106,36 +145,6 @@ extension BinanceService {
                 buffer = []
             }
         }
-
-    }
-
-    func fetchData(completion: @escaping ([String: Any]?, Error?) -> Void) {
-        let url: URL
-
-        switch tradingType {
-        case .spot:
-            url = URL(string: "https://api.binance.com/api/v3/depth?symbol=\(market.uppercased())&limit=1000")!
-        case .futures:
-            url = URL(string: "https://fapi.binance.com/fapi/v1/depth?symbol=\(market.uppercased())&limit=1000")!
-        }
-
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-            guard let data = data else {
-                return
-            }
-
-            do {
-                if let array = try JSONSerialization.jsonObject(
-                        with: data, options: .allowFragments
-                ) as? [String: Any] {
-                    completion(array, nil)
-                }
-            } catch {
-                print(error)
-                completion(nil, error)
-            }
-        }
-        task.resume()
     }
 }
 
@@ -168,63 +177,74 @@ extension BinanceService: WebSocketConnectionDelegate {
     }
 
     func webSocketDidReceiveMessage(connection: WebSocketConnection, string: String) {
+        guard let data = string.data(using: .utf8, allowLossyConversion: false) else {
+            return
+        }
+
+        let depthStream: DepthStream
+
+        let decoder = JSONDecoder()
+
         do {
-            if let jsonArray = try JSONSerialization.jsonObject(
-                    with: string.data(using: .utf8)!,
-                    options: .allowFragments
-            ) as? [String: Any] {
-                if dataFetched {
-                    if let data = (tradingType == .spot) ? (jsonArray) : (jsonArray["data"] as? [String: Any]),
-
-//                    if let data = jsonArray["data"] as? [String: Any],
-                        let U = data["U"] as? UInt64,
-                        let u = data["u"] as? UInt64,
-                        let b = data["b"] as? [[String]],
-                        let a = data["a"] as? [[String]] {
-
-                            if flag {
-                                switch tradingType {
-                                case .spot:
-                                    if !(U <= lastUpdateId + 1 && u >= lastUpdateId + 1) {
-                                        print("Restarting...")
-                                        startOrderBook()
-                                    }
-                                case .futures:
-                                    if !(U <= lastUpdateId && u >= lastUpdateId) {
-                                        print("Restarting...")
-                                        startOrderBook()
-                                    }
-                                }
-                                flag = false
-                            }
-
-                            DispatchQueue.main.async { [self] in
-                                for bid in b {
-                                    let priceLevel: Double = Double(bid[0])!
-                                    let quantity: Double = Double(bid[1])!
-
-                                    bids[priceLevel] = quantity
-                                }
-
-                                for ask in a {
-                                    asks[Double(ask[0])!] = Double(ask[1])!
-                                }
-                            }
-
-                        }
-                    } else {
-                        buffer.append(jsonArray)
-                    }
-                } else {
-                    print("bad json")
-                }
-            } catch let error as NSError {
-                print(error)
+            if tradingType == .spot {
+                depthStream = try decoder.decode(SpotDepthStream.self, from: data).data
+            } else {
+                depthStream = try decoder.decode(SpotDepthStream.self, from: data).data
             }
+        } catch {
+            print(error)
+            return
         }
 
-        func webSocketDidReceiveMessage(connection: WebSocketConnection, data: Data) {
-            // Respond to a WebSocket connection receiving a binary `Data` message
+        if dataFetched {
+            if flag {
+                switch tradingType {
+                case .spot:
+                    if !(depthStream.U <= lastUpdateId + 1 && depthStream.u >= lastUpdateId + 1) {
+                        print("Restarting...")
+                        startOrderBook()
+                    }
+                case .futures:
+                    if !(depthStream.U <= lastUpdateId && depthStream.u >= lastUpdateId) {
+                        print("Restarting...")
+                        startOrderBook()
+                    }
+                }
+                flag = false
+            }
+
+            DispatchQueue.main.async { [self] in
+                for bid in depthStream.b {
+                    var priceLevel: Double = Double(bid[0])!
+                    let quantity: Double = Double(bid[1])!
+
+                    if tradingType == .spot {
+                        priceLevel -= 10
+                    }
+
+                    bids[priceLevel] = quantity
+                }
+
+                for ask in depthStream.a {
+                    var priceLevel: Double = Double(ask[0])!
+                    let quantity: Double = Double(ask[1])!
+
+                    if tradingType == .spot {
+                        priceLevel -= 10
+                    }
+
+                    asks[priceLevel] = quantity
+                }
+            }
+
+        } else {
+            buffer.append(depthStream)
         }
+
     }
+
+    func webSocketDidReceiveMessage(connection: WebSocketConnection, data: Data) {
+        // Respond to a WebSocket connection receiving a binary `Data` message
+    }
+}
 
