@@ -13,12 +13,15 @@
 		174064A580DDD9D9769CE61C /* LiquidationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406262AD5DEF0C07D16174 /* LiquidationsView.swift */; };
 		17406556DB5AB81DE07283F9 /* DepthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406ED179D94B6AB563E12A /* DepthView.swift */; };
 		174065A304BB1FCDFEC61B6F /* TradesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406206F0627D5BC84E73EA /* TradesView.swift */; };
+		174067FC718BE04BE56EB457 /* BinanceApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1740662B2F396E71B8B21466 /* BinanceApi.swift */; };
 		17406A682E0287467949C1C3 /* DepthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174067AF02B71FBDFB961E90 /* DepthViewModel.swift */; };
 		17406AA49963D665E06286BD /* SpotDepth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406FE7447402E42578523C /* SpotDepth.swift */; };
 		17406AB3F5B80CF611E186E7 /* SpotDepthStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174061BAB5258EDC156C9925 /* SpotDepthStream.swift */; };
 		17406ABD43A87E4B8861E71B /* DepthStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406BAA3D7921E95318ADA5 /* DepthStream.swift */; };
+		17406BCDB1C0380399C8A5D0 /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406687E6735CC35053F29F /* Base.swift */; };
 		17406F5BB1A3B342DA1A5631 /* Depth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174062F92E9BF44103923887 /* Depth.swift */; };
 		17406F6D03D399D5768DFD83 /* FuturesDepth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1740635DB2E1E709F9C9F5F0 /* FuturesDepth.swift */; };
+		17406FBF14CF633B6F75833F /* DataRequest+BinanceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406C8A3319EAA10B51AA68 /* DataRequest+BinanceRequest.swift */; };
 		AC00592D28B81A39001A13F7 /* ExchangeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00592C28B81A39001A13F7 /* ExchangeService.swift */; };
 		AC00593028B81AC6001A13F7 /* BinanceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC00592F28B81AC6001A13F7 /* BinanceService.swift */; };
 		AC8078D22893E1B200888287 /* TradingDashboardApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8078D12893E1B200888287 /* TradingDashboardApp.swift */; };
@@ -35,6 +38,7 @@
 		ACA79A5828B54B7000C19078 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = ACA79A5728B54B7000C19078 /* OrderedCollections */; };
 		ACA79A5D28B7E6C700C19078 /* NWWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = ACA79A5C28B7E6C700C19078 /* NWWebSocket */; };
 		ACF56F1A28BBD6FB000DE227 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = ACF56F1928BBD6FB000DE227 /* Alamofire */; };
+		ACF56F1D28BCFB55000DE227 /* SwiftyJSON in Frameworks */ = {isa = PBXBuildFile; productRef = ACF56F1C28BCFB55000DE227 /* SwiftyJSON */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,9 +65,12 @@
 		174062F92E9BF44103923887 /* Depth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Depth.swift; sourceTree = "<group>"; };
 		1740633A387C973FFF88DBCC /* TradingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingType.swift; sourceTree = "<group>"; };
 		1740635DB2E1E709F9C9F5F0 /* FuturesDepth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuturesDepth.swift; sourceTree = "<group>"; };
+		1740662B2F396E71B8B21466 /* BinanceApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceApi.swift; sourceTree = "<group>"; };
+		17406687E6735CC35053F29F /* Base.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base.swift; sourceTree = "<group>"; };
 		174067AF02B71FBDFB961E90 /* DepthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepthViewModel.swift; sourceTree = "<group>"; };
 		17406BAA3D7921E95318ADA5 /* DepthStream.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepthStream.swift; sourceTree = "<group>"; };
 		17406C6E3ED60252294C6487 /* TradesViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesViewModel.swift; sourceTree = "<group>"; };
+		17406C8A3319EAA10B51AA68 /* DataRequest+BinanceRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DataRequest+BinanceRequest.swift"; sourceTree = "<group>"; };
 		17406D5A9B47F0568AA62F31 /* LiquidationsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiquidationsViewModel.swift; sourceTree = "<group>"; };
 		17406ED179D94B6AB563E12A /* DepthView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DepthView.swift; sourceTree = "<group>"; };
 		17406FE7447402E42578523C /* SpotDepth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotDepth.swift; sourceTree = "<group>"; };
@@ -89,6 +96,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ACF56F1D28BCFB55000DE227 /* SwiftyJSON in Frameworks */,
 				ACF56F1A28BBD6FB000DE227 /* Alamofire in Frameworks */,
 				ACA79A5428B54B7000C19078 /* Collections in Frameworks */,
 				ACA79A5628B54B7000C19078 /* DequeModule in Frameworks */,
@@ -132,6 +140,24 @@
 				174062F92E9BF44103923887 /* Depth.swift */,
 			);
 			path = Binance;
+			sourceTree = "<group>";
+		};
+		17406DD98BE82370DD8D36F4 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				17406E6883C75DC905BDE2BC /* BinanceApi */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		17406E6883C75DC905BDE2BC /* BinanceApi */ = {
+			isa = PBXGroup;
+			children = (
+				17406687E6735CC35053F29F /* Base.swift */,
+				1740662B2F396E71B8B21466 /* BinanceApi.swift */,
+				17406C8A3319EAA10B51AA68 /* DataRequest+BinanceRequest.swift */,
+			);
+			path = BinanceApi;
 			sourceTree = "<group>";
 		};
 		AC00592B28B819F3001A13F7 /* Models */ = {
@@ -185,6 +211,7 @@
 				AC8078D52893E1B200888287 /* Assets.xcassets */,
 				AC8078DA2893E1B200888287 /* TradingDashboard.entitlements */,
 				AC8078D72893E1B200888287 /* Preview Content */,
+				17406DD98BE82370DD8D36F4 /* External */,
 			);
 			path = TradingDashboard;
 			sourceTree = "<group>";
@@ -265,6 +292,7 @@
 				ACA79A5728B54B7000C19078 /* OrderedCollections */,
 				ACA79A5C28B7E6C700C19078 /* NWWebSocket */,
 				ACF56F1928BBD6FB000DE227 /* Alamofire */,
+				ACF56F1C28BCFB55000DE227 /* SwiftyJSON */,
 			);
 			productName = TradingDashboard;
 			productReference = AC8078CE2893E1B200888287 /* TradingDashboard.app */;
@@ -342,6 +370,7 @@
 				ACA79A5228B54B7000C19078 /* XCRemoteSwiftPackageReference "swift-collections" */,
 				ACA79A5B28B7E6C700C19078 /* XCRemoteSwiftPackageReference "NWWebSocket" */,
 				ACF56F1828BBD6FB000DE227 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				ACF56F1B28BCFB55000DE227 /* XCRemoteSwiftPackageReference "SwiftyJSON" */,
 			);
 			productRefGroup = AC8078CF2893E1B200888287 /* Products */;
 			projectDirPath = "";
@@ -403,6 +432,9 @@
 				17406AB3F5B80CF611E186E7 /* SpotDepthStream.swift in Sources */,
 				17406AA49963D665E06286BD /* SpotDepth.swift in Sources */,
 				17406F5BB1A3B342DA1A5631 /* Depth.swift in Sources */,
+				17406BCDB1C0380399C8A5D0 /* Base.swift in Sources */,
+				174067FC718BE04BE56EB457 /* BinanceApi.swift in Sources */,
+				17406FBF14CF633B6F75833F /* DataRequest+BinanceRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -746,6 +778,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		ACF56F1B28BCFB55000DE227 /* XCRemoteSwiftPackageReference "SwiftyJSON" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftyJSON/SwiftyJSON";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -773,6 +813,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = ACF56F1828BBD6FB000DE227 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		ACF56F1C28BCFB55000DE227 /* SwiftyJSON */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ACF56F1B28BCFB55000DE227 /* XCRemoteSwiftPackageReference "SwiftyJSON" */;
+			productName = SwiftyJSON;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

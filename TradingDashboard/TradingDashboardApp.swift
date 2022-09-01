@@ -27,8 +27,8 @@ struct SettingsPane: View {
 struct TradingDashboardApp: App {
     var body: some Scene {
         WindowGroup {
-            DepthView()
-//            ContentView()
+//            DepthView()
+            ContentView()
         }
 
         #if os(macOS)

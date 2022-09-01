@@ -7,8 +7,10 @@
 
 import Foundation
 import Network
-import NWWebSocket
+
 import Alamofire
+import SwiftyJSON
+import NWWebSocket
 
 class BinanceService: ExchangeService {
     private let socket: NWWebSocket!
@@ -29,7 +31,11 @@ class BinanceService: ExchangeService {
         case BTCBUSD = "btcbusd"
     }
 
+    let api = Client()
+
     init(_ tradingType: TradingType, _ market: Market) {
+//        api.getAccountInformation()
+//        api.getAccountTradeList()
         self.tradingType = tradingType
         self.market = market
 
@@ -66,6 +72,49 @@ class BinanceService: ExchangeService {
 }
 
 
+// MARK: - Client for user information and trading
+
+extension BinanceService {
+    class Client {
+        private let api: BinanceApi
+
+        init() {
+            api = BinanceApi(apiKey: SettingsPane.apiKey, secretKey: SettingsPane.apiSecret)
+        }
+
+        func getAccountTradeList() {
+
+
+            DispatchQueue.main.async { [self] in
+                let req = api.send(BinanceAccountTradeListRequest(symbol: "btcbusd")) { response in
+                }
+                req.responseString {
+                    response in
+                    if let data = response.data {
+                        let json = JSON(data)
+                        print(json)
+                    }
+                }
+            }
+
+        }
+
+        func getAccountInformation() {
+            DispatchQueue.main.async { [self] in
+                let req = api.send(BinanceAccountInformationRequest()) { response in
+                }
+                req.responseString { response in
+                    if let data = response.data {
+                        let json = JSON(data)
+//                        print(json)
+                    }
+                }
+            }
+        }
+
+    }
+}
+
 // MARK: - Extension
 
 extension BinanceService {
@@ -80,6 +129,7 @@ extension BinanceService {
         }
 
         let request = AF.request(url)
+
 
         request.responseDecodable(of: T.self) { [self] data in
             if let depth = data.value {
