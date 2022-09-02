@@ -18,6 +18,7 @@
 		17406AA49963D665E06286BD /* SpotDepth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406FE7447402E42578523C /* SpotDepth.swift */; };
 		17406AB3F5B80CF611E186E7 /* SpotDepthStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174061BAB5258EDC156C9925 /* SpotDepthStream.swift */; };
 		17406ABD43A87E4B8861E71B /* DepthStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406BAA3D7921E95318ADA5 /* DepthStream.swift */; };
+		17406B340AD9103488BBE5C9 /* FTXService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406327D126B898D84B3A05 /* FTXService.swift */; };
 		17406BCDB1C0380399C8A5D0 /* Base.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17406687E6735CC35053F29F /* Base.swift */; };
 		17406F5BB1A3B342DA1A5631 /* Depth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 174062F92E9BF44103923887 /* Depth.swift */; };
 		17406F6D03D399D5768DFD83 /* FuturesDepth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1740635DB2E1E709F9C9F5F0 /* FuturesDepth.swift */; };
@@ -63,6 +64,7 @@
 		17406206F0627D5BC84E73EA /* TradesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradesView.swift; sourceTree = "<group>"; };
 		17406262AD5DEF0C07D16174 /* LiquidationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiquidationsView.swift; sourceTree = "<group>"; };
 		174062F92E9BF44103923887 /* Depth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Depth.swift; sourceTree = "<group>"; };
+		17406327D126B898D84B3A05 /* FTXService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FTXService.swift; sourceTree = "<group>"; };
 		1740633A387C973FFF88DBCC /* TradingType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TradingType.swift; sourceTree = "<group>"; };
 		1740635DB2E1E709F9C9F5F0 /* FuturesDepth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FuturesDepth.swift; sourceTree = "<group>"; };
 		1740662B2F396E71B8B21466 /* BinanceApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BinanceApi.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				AC00592F28B81AC6001A13F7 /* BinanceService.swift */,
+				17406327D126B898D84B3A05 /* FTXService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				17406BCDB1C0380399C8A5D0 /* Base.swift in Sources */,
 				174067FC718BE04BE56EB457 /* BinanceApi.swift in Sources */,
 				17406FBF14CF633B6F75833F /* DataRequest+BinanceRequest.swift in Sources */,
+				17406B340AD9103488BBE5C9 /* FTXService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

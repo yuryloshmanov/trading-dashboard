@@ -18,6 +18,7 @@ struct Price: View {
 
             Button {
                 print(k)
+                BinanceService.api.newOrder(forPrice: k)
 
                 if checkState {
                     checkState = false
@@ -139,61 +140,114 @@ struct DepthView: View {
     @State var isLoading: Bool
     @ObservedObject var viewModel: DepthViewModel
 
-    var size: Int = 100
+//    var size: Int = 100
 
     var body: some View {
-        GeometryReader { geometry in
+        HStack(spacing: 0) {
             VStack(spacing: 0) {
-                if !viewModel.aggAsks.isEmpty {
-                    HStack(spacing: 0) {
-                        Text("Price")
-                            .padding(.leading, 15)
-                        Spacer()
-                        Text("BTC")
-                            .padding(.trailing, 15)
-                    }
-                }
+                GeometryReader { geometry in
+                    if !viewModel.aggAsks.isEmpty {
+                        VStack(spacing: 0) {
+                            HStack(spacing: 0) {
 
-                ScrollView(.vertical) {
-                    VStack(spacing: 0) {
-                        if viewModel.aggAsks.isEmpty {
-                            ProgressView()
-                        }
-
-                        ForEach(viewModel.aggAsks.sorted(by: >).suffix(size), id: \.key) { k, v in
-                            if v > 0 {
-                                PriceLevel(k, v)
-                                    .frame(width: geometry.size.width, height: 20)
-                            }
-                        }
-
-                        if !viewModel.aggAsks.isEmpty {
-                            Divider()
-                                .frame(width: geometry.size.width, height: 10)
-                        }
-
-                        ForEach(viewModel.aggBids.sorted(by: >).prefix(size), id: \.key) { k, v in
-                            if v > 0 {
-                                PriceLevel(k, v)
-                                    .frame(width: geometry.size.width, height: 20)
+                                Text("Price")
+                                    .padding(.leading, 15)
+                                Spacer()
+                                Text("BTC")
+                                    .padding(.trailing, 15)
                             }
                         }
                     }
-                        .padding()
-                        .frame(width: geometry.size.width)
-                        .frame(minHeight: geometry.size.height)
-                }
 
+                    ScrollView(.vertical) {
+                        VStack(spacing: 0) {
+                            if viewModel.aggAsks.isEmpty {
+                                ProgressView()
+                            }
+
+                            ForEach(viewModel.aggAsks.sorted(by: >).suffix(SettingsPane.orderBookSize), id: \.key) { k, v in
+                                if v > 0 {
+                                    PriceLevel(k, v)
+                                        .frame(width: geometry.size.width, height: 20)
+                                }
+                            }
+
+                            if !viewModel.aggAsks.isEmpty {
+                                Divider()
+                                    .frame(width: geometry.size.width, height: 10)
+                            }
+
+                            ForEach(viewModel.aggBids.sorted(by: >).prefix(SettingsPane.orderBookSize), id: \.key) { k, v in
+                                if v > 0 {
+                                    PriceLevel(k, v)
+                                        .frame(width: geometry.size.width, height: 20)
+                                }
+                            }
+                        }
+                            .padding()
+                            .frame(width: geometry.size.width)
+                            .frame(minHeight: geometry.size.height)
+                    }
+
+                } //
             }
                 .onAppear {
                     isLoading = true
                     viewModel.start()
                 }
+            VStack(spacing: 0) {
+                ForEach(viewModel.pong.keys.sorted(), id: \.self) { key in
+                    Ex(key, viewModel.pong[key]!)
+                }
+
+                Spacer()
+            }
+                .frame(maxWidth: 230)
         }
     }
 
     init() {
         isLoading = false
         viewModel = DepthViewModel()
+    }
+}
+
+extension DepthView {
+    struct Ex: View {
+        var name: String = ""
+        @State var color: Color = .green
+        @State var isActive: Bool
+
+        var body: some View {
+
+            HStack(spacing: 0) {
+                Circle()
+                    .fill(color)
+                    .frame(width: 5, height: 5)
+                    .shadow(color: color, radius: 2)
+                    .padding(.leading, 7)
+                    .padding(.trailing, 7)
+                Text(name)
+
+                Spacer()
+                Toggle(isOn: $isActive) {
+                    Text("")
+                }
+                    .padding(.leading, 10)
+                    .onChange(of: isActive) { value in
+                        for i in 0..<DepthViewModel.exchangeServices.count {
+                            if DepthViewModel.exchangeServices[i].0.name == name {
+                                DepthViewModel.exchangeServices[i].1 = value
+                            }
+                        }
+                    }
+            }
+        }
+
+        init(_ name: String, _ pongReceived: Bool) {
+            self.name = name
+            color = pongReceived ? Color.green : Color.red
+            isActive = true
+        }
     }
 }

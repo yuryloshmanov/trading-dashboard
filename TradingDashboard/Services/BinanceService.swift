@@ -13,6 +13,7 @@ import SwiftyJSON
 import NWWebSocket
 
 class BinanceService: ExchangeService {
+    let name: String
     private let socket: NWWebSocket!
 
     private(set) var dataFetched: Bool
@@ -31,11 +32,19 @@ class BinanceService: ExchangeService {
         case BTCBUSD = "btcbusd"
     }
 
-    let api = Client()
+    // TODO: fix
+
+    var pongReceived: Bool = false
+    static let api = Client()
 
     init(_ tradingType: TradingType, _ market: Market) {
 //        api.getAccountInformation()
 //        api.getAccountTradeList()
+        if tradingType == .spot {
+            name = "Binance (\(market.rawValue.uppercased()))"
+        } else {
+            name = "Binance Futures (\(market.rawValue.uppercased()))"
+        }
         self.tradingType = tradingType
         self.market = market
 
@@ -68,6 +77,11 @@ class BinanceService: ExchangeService {
                 getSnapshot(FuturesDepth.self)
             }
         }
+
+        Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { _ in
+            self.pongReceived = false
+            self.socket.ping()
+        }
     }
 }
 
@@ -82,14 +96,27 @@ extension BinanceService {
             api = BinanceApi(apiKey: SettingsPane.apiKey, secretKey: SettingsPane.apiSecret)
         }
 
+        func newOrder(forPrice price: Double) {
+            let req = api.send(BinanceNewOrderRequest(
+                    symbol: "BTCUSDT",
+                    side: .long,
+                    type: .limit,
+                    quantity: 1,
+                    price: Decimal(price),
+                    timeInForce: .GTX
+            )) { response in
+            }
+
+            req.responseString { response in
+                print(response)
+            }
+        }
+
         func getAccountTradeList() {
-
-
             DispatchQueue.main.async { [self] in
                 let req = api.send(BinanceAccountTradeListRequest(symbol: "btcbusd")) { response in
                 }
-                req.responseString {
-                    response in
+                req.responseString { response in
                     if let data = response.data {
                         let json = JSON(data)
                         print(json)
@@ -106,7 +133,7 @@ extension BinanceService {
                 req.responseString { response in
                     if let data = response.data {
                         let json = JSON(data)
-//                        print(json)
+                        print(json)
                     }
                 }
             }
@@ -202,6 +229,7 @@ extension BinanceService {
 extension BinanceService: WebSocketConnectionDelegate {
     func webSocketDidConnect(connection: WebSocketConnection) {
         // Respond to a WebSocket connection event
+        pongReceived = true
     }
 
     func webSocketDidDisconnect(connection: WebSocketConnection,
@@ -224,6 +252,7 @@ extension BinanceService: WebSocketConnectionDelegate {
 
     func webSocketDidReceivePong(connection: WebSocketConnection) {
         // Respond to a WebSocket connection receiving a Pong from the peer
+        pongReceived = true
     }
 
     func webSocketDidReceiveMessage(connection: WebSocketConnection, string: String) {
@@ -237,7 +266,7 @@ extension BinanceService: WebSocketConnectionDelegate {
 
         do {
             if tradingType == .spot {
-                depthStream = try decoder.decode(SpotDepthStream.self, from: data).data
+                depthStream = try decoder.decode(DepthStream.self, from: data)
             } else {
                 depthStream = try decoder.decode(SpotDepthStream.self, from: data).data
             }

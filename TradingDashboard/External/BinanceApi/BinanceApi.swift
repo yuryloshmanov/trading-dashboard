@@ -275,7 +275,7 @@ public struct BinanceAllBookTickersRequest: BinanceRequest, Codable {
 
 /// Send in a new order.
 public struct BinanceNewOrderRequest: BinanceSignedRequest, Codable {
-    public static let endpoint = "v3/order"
+    public static let endpoint = "/fapi/v1/order"
     public static let method = HTTPMethod.post
 
     public let symbol: String

@@ -72,11 +72,13 @@ public enum BinanceOrderType: String, Codable {
 }
 
 public enum BinanceOrderSide: String, Codable {
-    case buy = "BUY"
-    case sell = "SELL"
+    case both = "BOTH"
+    case long = "BUY"
+    case short = "SELL"
 }
 
 public enum BinanceOrderTime: String, Codable {
+    case GTX = "GTX"
     case goodTilCancelled = "GTC"
     case immediateOrCancel = "IOC"
 }

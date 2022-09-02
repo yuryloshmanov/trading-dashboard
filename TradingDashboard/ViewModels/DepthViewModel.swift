@@ -13,15 +13,18 @@ extension DepthView {
         private(set) var aggBids: [Double: Double]
         private(set) var aggAsks: [Double: Double]
 
-        var grouping: Int = 5
+//        @Published var grouping: Int = 5
+//        @Published var grouping: Int = SettingsPane.orderBookGrouping
 
         var lastUpdateId: UInt64
 
         @Published var index: UInt = 0
 
+        @Published var pong: [String: Bool] = [:]
+
         var timer: Timer?
 
-        var exchangeServices: [ExchangeService]
+        static var exchangeServices: [(ExchangeService, Bool)] = []
 
         deinit {
             timer?.invalidate()
@@ -31,13 +34,17 @@ extension DepthView {
             aggAsks = [:]
             aggBids = [:]
 
-            for exchange in exchangeServices {
+            for (exchange, active) in Self.exchangeServices {
+                if !active {
+                    continue
+                }
+
                 for bid in exchange.bids {
                     if bid.1 == 0 {
                         continue
                     }
 
-                    let price: Double = bid.0.rounded() - Double(Int(bid.0.rounded()) % grouping)
+                    let price: Double = bid.0.rounded() - Double(Int(bid.0.rounded()) % SettingsPane.orderBookGrouping)
 
                     if aggBids[price] == nil {
                         aggBids[price] = 0
@@ -52,7 +59,7 @@ extension DepthView {
                         continue
                     }
 
-                    let price: Double = ask.0.rounded() - Double(Int(ask.0.rounded()) % grouping)
+                    let price: Double = ask.0.rounded() - Double(Int(ask.0.rounded()) % SettingsPane.orderBookGrouping)
 
                     if aggAsks[price] == nil {
                         aggAsks[price] = 0
@@ -66,27 +73,51 @@ extension DepthView {
         }
 
         func start() {
-            for exchange in exchangeServices {
+            for (exchange, _) in Self.exchangeServices {
                 exchange.startOrderBook()
             }
         }
 
+
         init() {
-            exchangeServices = [
-//                BinanceService(.spot, .BTCUSDT),
-//                BinanceService(.spot, .BTCBUSD),
+            let exchangeServices = [
+                // Binance
+                BinanceService(.spot, .BTCUSDT),
+                BinanceService(.spot, .BTCBUSD),
                 BinanceService(.futures, .BTCUSDT),
-                BinanceService(.futures, .BTCBUSD)
+                BinanceService(.futures, .BTCBUSD),
+
+                // FTX
+//                FTXService(.spot, .BTCUSD),
+//                FTXService(.spot, .BTCUSDT, -5),
+//                FTXService(.futures, .BTC_PERP, -5),
+//                FTXService(.futures, .BTC_0930),
+//                FTXService(.futures, .BTC_1230, -70),
             ]
+
+            for ex in exchangeServices {
+                Self.exchangeServices.append((ex, true))
+            }
+
 
             aggAsks = [:]
             aggBids = [:]
 
             lastUpdateId = 0
 
-            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true, block: { _ in
+            timer = Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
                 self.refresh()
-            })
+            }
+
+            Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [self] _ in
+                for (exchange, isActive) in Self.exchangeServices {
+                    pong[exchange.name] = exchange.pongReceived
+                }
+            }
+
+            let date = DateComponents(calendar: Calendar.current)
+            print(date.minute ?? "")
         }
+
     }
 }
