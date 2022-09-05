@@ -270,6 +270,7 @@ extension DepthView {
                     .padding(.leading, 7)
                     .padding(.trailing, 7)
                 Text(name)
+                    .font(.system(size: 10))
 
                 Spacer()
                 Toggle(isOn: $isActive) {

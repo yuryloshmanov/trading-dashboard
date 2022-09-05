@@ -30,14 +30,19 @@ class BinanceService: ExchangeService {
     enum Market: String {
         case BTCUSDT = "btcusdt"
         case BTCBUSD = "btcbusd"
+        case BTCUSD_PERP = "btcusd_perp"
+        case BTCUSD_220930 = "btcusd_220930"
+        case BTCUSD_221230 = "btcusd_221230"
     }
 
     // TODO: fix
 
     var pongReceived: Bool = false
     static let api = Client()
+    let matching: Double
 
-    init(_ tradingType: TradingType, _ market: Market) {
+    init(_ tradingType: TradingType, _ market: Market, _ matching: Double = 0) {
+        self.matching = matching
 //        api.getAccountInformation()
 //        api.getAccountTradeList()
         if tradingType == .spot {
@@ -58,8 +63,10 @@ class BinanceService: ExchangeService {
         switch tradingType {
         case .spot:
             serverURL = URL(string: "wss://stream.binance.com:9443/ws/\(market.rawValue)@depth")!
-        case .futures:
+        case .usds_futures:
             serverURL = URL(string: "wss://fstream.binance.com/stream?streams=\(market.rawValue)@depth")!
+        case .coin_futures:
+            serverURL = URL(string: "wss://dstream.binance.com/stream?streams=\(market.rawValue)@depth")!
         }
 
         socket = NWWebSocket(url: serverURL)
@@ -73,7 +80,9 @@ class BinanceService: ExchangeService {
             switch tradingType {
             case .spot:
                 getSnapshot(SpotDepth.self)
-            case .futures:
+            case .usds_futures:
+                fallthrough
+            case .coin_futures:
                 getSnapshot(FuturesDepth.self)
             }
         }
@@ -151,8 +160,10 @@ extension BinanceService {
         switch tradingType {
         case .spot:
             url = "https://api.binance.com/api/v3/depth?symbol=\(market.rawValue.uppercased())&limit=10000000"
-        case .futures:
+        case .usds_futures:
             url = "https://fapi.binance.com/fapi/v1/depth?symbol=\(market.rawValue.uppercased())&limit=1000"
+        case .coin_futures:
+            url = "https://dapi.binance.com/dapi/v1/depth?symbol=\(market.rawValue.uppercased())&limit=1000"
         }
 
         let request = AF.request(url)
@@ -162,10 +173,14 @@ extension BinanceService {
             if let depth = data.value {
                 for bid in depth.bids {
                     var priceLevel = Double(bid[0])!
-                    let quantity = Double(bid[1])!
+                    var quantity = Double(bid[1])!
 
+                    priceLevel += matching
                     if tradingType == .spot {
                         priceLevel -= 10
+                    } else if tradingType == .coin_futures {
+                        quantity *= 100
+                        quantity /= priceLevel
                     }
 
                     bids[priceLevel] = quantity
@@ -173,10 +188,14 @@ extension BinanceService {
 
                 for ask in depth.asks {
                     var priceLevel = Double(ask[0])!
-                    let quantity = Double(ask[1])!
+                    var quantity = Double(ask[1])!
 
+                    priceLevel += matching
                     if tradingType == .spot {
                         priceLevel -= 10
+                    } else if tradingType == .coin_futures {
+                        quantity *= 100
+                        quantity /= priceLevel
                     }
 
                     asks[priceLevel] = quantity
@@ -192,10 +211,14 @@ extension BinanceService {
                     DispatchQueue.main.async { [self] in
                         for bid in item.b {
                             var priceLevel = Double(bid[0])!
-                            let quantity = Double(bid[1])!
+                            var quantity = Double(bid[1])!
 
+                            priceLevel += matching
                             if tradingType == .spot {
                                 priceLevel -= 10
+                            } else if tradingType == .coin_futures {
+                                quantity *= 100
+                                quantity /= priceLevel
                             }
 
                             bids[priceLevel] = quantity
@@ -203,10 +226,14 @@ extension BinanceService {
 
                         for ask in item.a {
                             var priceLevel = Double(ask[0])!
-                            let quantity = Double(ask[1])!
+                            var quantity = Double(ask[1])!
 
+                            priceLevel += matching
                             if tradingType == .spot {
                                 priceLevel -= 10
+                            } else if tradingType == .coin_futures {
+                                quantity *= 100
+                                quantity /= priceLevel
                             }
 
                             asks[priceLevel] = quantity
@@ -283,7 +310,9 @@ extension BinanceService: WebSocketConnectionDelegate {
                         print("Restarting...")
                         startOrderBook()
                     }
-                case .futures:
+                case .usds_futures:
+                    fallthrough
+                case .coin_futures:
                     if !(depthStream.U <= lastUpdateId && depthStream.u >= lastUpdateId) {
                         print("Restarting...")
                         startOrderBook()
@@ -295,10 +324,14 @@ extension BinanceService: WebSocketConnectionDelegate {
             DispatchQueue.main.async { [self] in
                 for bid in depthStream.b {
                     var priceLevel: Double = Double(bid[0])!
-                    let quantity: Double = Double(bid[1])!
+                    var quantity: Double = Double(bid[1])!
 
+                    priceLevel += matching
                     if tradingType == .spot {
                         priceLevel -= 10
+                    } else if tradingType == .coin_futures {
+                        quantity *= 100
+                        quantity /= priceLevel
                     }
 
                     bids[priceLevel] = quantity
@@ -306,10 +339,14 @@ extension BinanceService: WebSocketConnectionDelegate {
 
                 for ask in depthStream.a {
                     var priceLevel: Double = Double(ask[0])!
-                    let quantity: Double = Double(ask[1])!
+                    var quantity: Double = Double(ask[1])!
 
+                    priceLevel += matching
                     if tradingType == .spot {
                         priceLevel -= 10
+                    } else if tradingType == .coin_futures {
+                        quantity *= 100
+                        quantity /= priceLevel
                     }
 
                     asks[priceLevel] = quantity

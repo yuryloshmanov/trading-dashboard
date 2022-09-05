@@ -6,5 +6,6 @@ import Foundation
 
 enum TradingType {
     case spot
-    case futures
+    case usds_futures
+    case coin_futures
 }

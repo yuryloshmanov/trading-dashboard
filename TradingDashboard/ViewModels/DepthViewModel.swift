@@ -90,11 +90,13 @@ extension DepthView {
                 BinanceService(.spot, .BTCBUSD),
 
                 // USDⓈ-M Futures
-                BinanceService(.futures, .BTCUSDT),
-                BinanceService(.futures, .BTCBUSD),
+                BinanceService(.usds_futures, .BTCUSDT),
+                BinanceService(.usds_futures, .BTCBUSD),
 
                 // COIN-M Futures
-                // TODO
+                BinanceService(.coin_futures, .BTCUSD_PERP),
+                BinanceService(.coin_futures, .BTCUSD_220930, -10),
+                BinanceService(.coin_futures, .BTCUSD_221230, -45),
 
                 // -------------------------------------
                 // FTX
