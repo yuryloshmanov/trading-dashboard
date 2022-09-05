@@ -93,7 +93,7 @@ extension BinanceService {
         private let api: BinanceApi
 
         init() {
-            api = BinanceApi(apiKey: SettingsPane.apiKey, secretKey: SettingsPane.apiSecret)
+            api = BinanceApi(apiKey: APISettingsPane.apiKey, secretKey: APISettingsPane.apiSecret)
         }
 
         func newOrder(forPrice price: Double) {
@@ -150,7 +150,7 @@ extension BinanceService {
 
         switch tradingType {
         case .spot:
-            url = "https://api.binance.com/api/v3/depth?symbol=\(market.rawValue.uppercased())&limit=1000"
+            url = "https://api.binance.com/api/v3/depth?symbol=\(market.rawValue.uppercased())&limit=10000000"
         case .futures:
             url = "https://fapi.binance.com/fapi/v1/depth?symbol=\(market.rawValue.uppercased())&limit=1000"
         }

@@ -116,8 +116,8 @@ public struct BinanceApi {
 
     private static var defaultSession: Session {
         let interceptor = BinanceRequestInterceptor(
-                apiKey: SettingsPane.apiKey,
-                secretKey: SettingsPane.apiSecret,
+                apiKey: APISettingsPane.apiKey,
+                secretKey: APISettingsPane.apiSecret,
                 receiveWindow: 5000
         )
 

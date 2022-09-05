@@ -12,36 +12,27 @@ struct TradesView: View {
             HStack(spacing: 0) {
                 Spacer()
                 ZStack {
-                    Rectangle()
-                        .fill(.black)
-                        .frame(width: 70, height: geometry.size.height)
-
                     VStack(spacing: 0) {
                         Spacer()
-                        Rectangle()
+                        BellCurve((5 + viewModel.selling.reduce(0, +)) / 20 * geometry.size.height / 3)
                             .fill(.red)
-                            .frame(width: 70, height: (5 + viewModel.selling.reduce(0, +)) / 20 * geometry.size.height)
                     }
 
                 }
                 ZStack {
-                    Rectangle()
-                        .fill(.black)
-                        .frame(width: 70, height: geometry.size.height)
-
                     VStack(spacing: 0) {
                         Spacer()
-                        Rectangle()
+                        BellCurve((5 + viewModel.buying.reduce(0, +)) / 20 * geometry.size.height / 3)
                             .fill(.green)
-                            .frame(width: 70, height: (5 + viewModel.buying.reduce(0, +)) / 20 * geometry.size.height)
                     }
                 }
-//                Spacer()
             }
+
+                .onAppear {
+                    viewModel.listenServer()
+                }
+
         }
-            .onAppear {
-                viewModel.listenServer()
-            }
     }
 
     init() {

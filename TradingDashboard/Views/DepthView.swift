@@ -116,9 +116,17 @@ struct PriceLevel: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                Rectangle()
-                    .fill(getColor(forLiquidity: quantity))
-                    .shadow(radius: 0)
+                if Int(priceLevel) % 10 == 0 && GeneralSettingsPane.orderBookGrouping == 1 {
+                    Rectangle()
+                        .fill(getColor(forLiquidity: quantity))
+                        .shadow(radius: 0)
+                        .border(.pink, width: 2)
+                } else {
+                    Rectangle()
+                        .fill(getColor(forLiquidity: quantity))
+                        .shadow(radius: 0)
+                }
+
 
                 HStack {
                     Price(priceLevel)
@@ -135,6 +143,39 @@ struct PriceLevel: View {
     }
 }
 
+struct BellCurve: Shape {
+    var height: CGFloat
+
+    func path(in rect: CGRect) -> Path {
+        Path { path in
+            let y: CGFloat = rect.height
+            let x: CGFloat = rect.width
+
+            path.move(to: CGPoint(x: 0, y: y))
+            path.addCurve(
+                    to: CGPoint(x: x / 2, y: y - height),
+                    control1: CGPoint(x: x / 4, y: y),
+                    control2: CGPoint(x: x / 4, y: y - height)
+            )
+            path.addCurve(
+                    to: CGPoint(x: x, y: y),
+                    control1: CGPoint(x: x * 3 / 4, y: y - height),
+                    control2: CGPoint(x: x * 3 / 4, y: y)
+            )
+            path.addLine(to: CGPoint(x: 0, y: y))
+            path.closeSubpath()
+        }
+    }
+
+    init() {
+        height = 100
+    }
+
+    init(_ height: CGFloat) {
+        self.height = height
+    }
+}
+
 
 struct DepthView: View {
     @State var isLoading: Bool
@@ -143,6 +184,7 @@ struct DepthView: View {
 //    var size: Int = 100
 
     var body: some View {
+
         HStack(spacing: 0) {
             VStack(spacing: 0) {
                 GeometryReader { geometry in
@@ -165,7 +207,7 @@ struct DepthView: View {
                                 ProgressView()
                             }
 
-                            ForEach(viewModel.aggAsks.sorted(by: >).suffix(SettingsPane.orderBookSize), id: \.key) { k, v in
+                            ForEach(viewModel.aggAsks.sorted(by: >).suffix(GeneralSettingsPane.orderBookSize), id: \.key) { k, v in
                                 if v > 0 {
                                     PriceLevel(k, v)
                                         .frame(width: geometry.size.width, height: 20)
@@ -177,7 +219,7 @@ struct DepthView: View {
                                     .frame(width: geometry.size.width, height: 10)
                             }
 
-                            ForEach(viewModel.aggBids.sorted(by: >).prefix(SettingsPane.orderBookSize), id: \.key) { k, v in
+                            ForEach(viewModel.aggBids.sorted(by: >).prefix(GeneralSettingsPane.orderBookSize), id: \.key) { k, v in
                                 if v > 0 {
                                     PriceLevel(k, v)
                                         .frame(width: geometry.size.width, height: 20)
@@ -189,7 +231,7 @@ struct DepthView: View {
                             .frame(minHeight: geometry.size.height)
                     }
 
-                } //
+                }
             }
                 .onAppear {
                     isLoading = true

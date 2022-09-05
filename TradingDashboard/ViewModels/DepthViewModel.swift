@@ -44,7 +44,7 @@ extension DepthView {
                         continue
                     }
 
-                    let price: Double = bid.0.rounded() - Double(Int(bid.0.rounded()) % SettingsPane.orderBookGrouping)
+                    let price: Double = bid.0.rounded() - Double(Int(bid.0.rounded()) % GeneralSettingsPane.orderBookGrouping)
 
                     if aggBids[price] == nil {
                         aggBids[price] = 0
@@ -59,7 +59,7 @@ extension DepthView {
                         continue
                     }
 
-                    let price: Double = ask.0.rounded() - Double(Int(ask.0.rounded()) % SettingsPane.orderBookGrouping)
+                    let price: Double = ask.0.rounded() - Double(Int(ask.0.rounded()) % GeneralSettingsPane.orderBookGrouping)
 
                     if aggAsks[price] == nil {
                         aggAsks[price] = 0
