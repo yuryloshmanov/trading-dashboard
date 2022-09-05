@@ -81,13 +81,24 @@ extension DepthView {
 
         init() {
             let exchangeServices = [
-                // Binance
+                // -------------------------------------
+                // BINANCE
+                // -------------------------------------
+
+                // Spot
                 BinanceService(.spot, .BTCUSDT),
                 BinanceService(.spot, .BTCBUSD),
+
+                // USDⓈ-M Futures
                 BinanceService(.futures, .BTCUSDT),
                 BinanceService(.futures, .BTCBUSD),
 
+                // COIN-M Futures
+                // TODO
+
+                // -------------------------------------
                 // FTX
+                // -------------------------------------
 //                FTXService(.spot, .BTCUSD),
 //                FTXService(.spot, .BTCUSDT, -5),
 //                FTXService(.futures, .BTC_PERP, -5),
@@ -110,7 +121,7 @@ extension DepthView {
             }
 
             Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [self] _ in
-                for (exchange, isActive) in Self.exchangeServices {
+                for (exchange, _) in Self.exchangeServices {
                     pong[exchange.name] = exchange.pongReceived
                 }
             }

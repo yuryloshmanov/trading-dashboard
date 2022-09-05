@@ -24,7 +24,7 @@ public struct BinanceTimeRequest: BinanceRequest {
     public static let method: HTTPMethod = .get
 
     public struct Response: Decodable {
-        public let localTime = Date()
+        public var localTime = Date()
         public let serverTime: Date
 
         public var delta: TimeInterval {
